@@ -1,6 +1,6 @@
 <?php
 ?>
-
+<div id="currencies"></div>
 <script>
 var data = null;
 getData();
@@ -19,12 +19,12 @@ function getData(){
 }
 
 function renderData(){
-	var body = document.getElementsByTagName("body")[0];
+	var target = document.getElementById("currencies");
 	data.forEach((item, index) => {
 		var z = document.createElement("p");
-		var x = document.createTextNode(item.name+": "+item.price_btc);
+		var x = document.createTextNode(item.name+": "+item.price_btc+" BTC  =  "+item.price_eur+" €");
 		z.appendChild(x);
-		body.appendChild(z);
+		target.appendChild(z);
 	});
 }
 

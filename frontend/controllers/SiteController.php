@@ -74,7 +74,7 @@ class SiteController extends Controller
      */
     public function actionUpdate(){
     	// fetch API
-    	$fullJsonData = file_get_contents("https://api.coinmarketcap.com/v1/ticker/");
+    	$fullJsonData = file_get_contents("https://api.coinmarketcap.com/v1/ticker/?convert=EUR");
     	$fullData = Json::decode($fullJsonData);
     	
     	// filter only those coins needed
