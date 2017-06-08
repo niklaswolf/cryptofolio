@@ -12,6 +12,9 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use common\models\Currencies;
+use yii\web\Response;
+use yii\helpers\Json;
 
 /**
  * Site controller
@@ -65,6 +68,37 @@ class SiteController extends Controller
         ];
     }
 
+    /**
+     * returns updated values for currencies from API
+     * @return string
+     */
+    public function actionUpdate(){
+    	// fetch API
+    	$fullJsonData = file_get_contents("https://api.coinmarketcap.com/v1/ticker/");
+    	$fullData = Json::decode($fullJsonData);
+    	
+    	// filter only those coins needed
+    	$filter = array();
+    	foreach(Currencies::find()->select("api_identificator")->all() as $currency){
+    		$filter[] = $currency->api_identificator;
+    	}
+    	
+    	$selectedData = array_filter($fullData, function ($item) use ($filter){
+    		if(in_array($item['id'], $filter )){
+    			return true;
+    		}
+    		return false;
+    	});
+    	
+    	// respond as JSON
+    	\Yii::$app->getResponse()->format = Response::FORMAT_JSON;
+    	return array_values($selectedData);
+    }
+    
+    public function actionTest(){
+    	return $this->render("test-api");
+    }
+    
     /**
      * Displays homepage.
      *

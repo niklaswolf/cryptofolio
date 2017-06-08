@@ -12,6 +12,7 @@ class m170606_190755_createTables extends Migration
 			'name' => $this->string()->notNull(),
 			'symbol' => $this->string(10)->notNull(),
 			'url' => $this->string()->defaultValue(null),
+			'api_identificator' => $this->string()->notNull()
 		]);
 		
 		$this->createTable("transactions", [
