@@ -12,17 +12,23 @@ use Yii;
  * @property string $symbol
  * @property string $url
  *
- * @property Transactions[] $transactions
- * @property Transactions[] $transactions0
+ * @property Transactions[] $transactionsOutgoing
+ * @property Transactions[] $transactionsIncoming
  */
 class Currencies extends \yii\db\ActiveRecord
 {
+	public $current;
+	
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
         return 'currencies';
+    }
+    
+    public function afterFind(){
+    	$this->current = $this->getAmount();
     }
 
     /**
@@ -50,10 +56,23 @@ class Currencies extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getAmount(){
+    	$incoming = 0;
+    	$outgoing = 0;
+    	foreach ($this->transactionsIncoming as $t){
+    		$incoming += $t->amount;
+    	}
+    	foreach ($this->transactionsOutgoing as $t){
+    		$outgoing += $t->amount * $t->exchange_btc;
+    	}
+    	
+    	return $incoming -$outgoing;
+    }
+    
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTransactions()
+    public function getTransactionsOutgoing()
     {
         return $this->hasMany(Transactions::className(), ['from_currency_id' => 'currency_id']);
     }
@@ -61,7 +80,7 @@ class Currencies extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTransactions0()
+    public function getTransactionsIncoming()
     {
         return $this->hasMany(Transactions::className(), ['to_currency_id' => 'currency_id']);
     }

@@ -73,30 +73,11 @@ class SiteController extends Controller
      * @return string
      */
     public function actionUpdate(){
-    	// fetch API
-    	$fullJsonData = file_get_contents("https://api.coinmarketcap.com/v1/ticker/?convert=EUR");
-    	$fullData = Json::decode($fullJsonData);
-    	
-    	// filter only those coins needed
-    	$filter = array();
-    	foreach(Currencies::find()->select("api_identificator")->all() as $currency){
-    		$filter[] = $currency->api_identificator;
-    	}
-    	
-    	$selectedData = array_filter($fullData, function ($item) use ($filter){
-    		if(in_array($item['id'], $filter )){
-    			return true;
-    		}
-    		return false;
-    	});
+    	$selectedData = $this->queryAPI();
     	
     	// respond as JSON
     	\Yii::$app->getResponse()->format = Response::FORMAT_JSON;
     	return array_values($selectedData);
-    }
-    
-    public function actionTest(){
-    	return $this->render("test-api");
     }
     
     /**
@@ -106,9 +87,68 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+    	$currencies = Currencies::find()->all();
+        return $this->render('index', [
+        	'currencies' => $currencies,
+        ]);
     }
 
+    
+    public function actionCurrencies(){
+    	$data = Currencies::find()->all();
+    	$apiData = $this->queryAPI();
+    	
+    	$filteredData = array();
+    	foreach ($data as $dataset){
+    		$currency = array();
+    		$currency["name"] = $dataset->name;
+    		$currency["symbol"] = $dataset->symbol;
+    		$currency["amount"] = $dataset->amount;
+    		$currency["api_identificator"] = $dataset->api_identificator;
+    		$currency["value_btc"] = 0;
+    		$currency["value_eur"] = 0;
+    		$currency["price_btc"] = 0;
+    		$currency["price_eur"] = 0;
+    		
+    		foreach ($apiData as $apiDataset){
+    			if($apiDataset['id'] == $dataset->api_identificator){
+    				$currency["price_btc"] = $apiDataset['price_btc'];
+    				$currency["price_eur"] = $apiDataset['price_eur'];
+    				
+    				$currency["value_btc"] = $currency["price_btc"] * $dataset->amount;
+    				$currency["value_eur"] = $currency["price_eur"] * $dataset->amount;
+    				break;
+    			}
+    		}
+    		
+    		$filteredData[] = $currency;
+    	}
+    	\Yii::$app->getResponse()->format = Response::FORMAT_JSON;
+    	return $filteredData;
+    }
+    
+    private function queryAPI(){
+    	// fetch API
+    	$fullJsonData = file_get_contents("https://api.coinmarketcap.com/v1/ticker/?convert=EUR");
+    	$fullData = Json::decode($fullJsonData);
+    	 
+    	// filter only those coins needed
+    	$filter = array();
+    	foreach(Currencies::find()->select("api_identificator")->where(['not like', 'api_identificator', 'euro'])->all() as $currency){
+    		$filter[] = $currency->api_identificator;
+    	}
+    	 
+    	$selectedData = array_filter($fullData, function ($item) use ($filter){
+    		if(in_array($item['id'], $filter )){
+    			return true;
+    		}
+    		return false;
+    	});
+    	
+    	return $selectedData;
+    }
+    
+    
     /**
      * Logs in a user.
      *
