@@ -10,6 +10,7 @@ $this->registerJsFile(Yii::$app->request->baseUrl . "/js/vue.js", ['depends' => 
 	<h2>Kontostand</h2>
 	<div> {{ value_btc }} BTC</div>
 	<b>{{ value_eur }} €</b>
+	<div id="profit">Profit: {{profit}}€</div>
 </div>
 <div id="currencies" class="col-xs-12 col-md-9 col-md-pull-3">
     <template v-for="currency in currencies">
@@ -34,5 +35,9 @@ $this->registerJsFile(Yii::$app->request->baseUrl . "/js/vue.js", ['depends' => 
 		background: #444;
 		color: #eee;
 		padding: 1em;
+	}
+	#profit {
+		margin-top: 1em;
+		font-size: 1.1em;
 	}
 </style>
