@@ -17,13 +17,15 @@ use common\models\Currencies;
     		Currencies::find()->select('name')->indexBy('currency_id')->column(),
     		['prompt' => "Select currency"]
     	) ?>
+    	
+    <?= $form->field($model, 'amount_from')->textInput() ?>
 
     <?= $form->field($model, 'to_currency_id')->dropDownList(
     		Currencies::find()->select('name')->indexBy('currency_id')->column(),
     		['prompt' => "Select currency"]
     	) ?>
 
-    <?= $form->field($model, 'amount')->textInput() ?>
+    <?= $form->field($model, 'amount_to')->textInput() ?>
 
     <?= $form->field($model, 'exchange_btc')->textInput() ?>
 

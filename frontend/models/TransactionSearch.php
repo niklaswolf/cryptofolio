@@ -19,7 +19,7 @@ class TransactionSearch extends Transactions
     {
         return [
             [['transaction_id', 'from_currency_id', 'to_currency_id'], 'integer'],
-            [['amount', 'exchange_btc', 'exchange_btc_eur', 'value_eur'], 'number'],
+            [['amount_from', 'amount_to','exchange_btc', 'exchange_btc_eur', 'value_eur'], 'number'],
             [['timestamp'], 'safe'],
         ];
     }
@@ -62,8 +62,9 @@ class TransactionSearch extends Transactions
         $query->andFilterWhere([
             'transaction_id' => $this->transaction_id,
             'from_currency_id' => $this->from_currency_id,
+        	'amount_from' => $this->amount_from,
             'to_currency_id' => $this->to_currency_id,
-            'amount' => $this->amount,
+            'amount_to' => $this->amount_to,
             'exchange_btc' => $this->exchange_btc,
             'exchange_btc_eur' => $this->exchange_btc_eur,
             'value_eur' => $this->value_eur,

@@ -33,11 +33,12 @@ $this->params['breadcrumbs'][] = $this->title;
         		'attribute' => 'fromCurrency.name',
         		'label' => "From",
     		],
+        	'amount_from',
         	[
         		'attribute' => 'toCurrency.name',
         		'label' => "To",
         	],
-            'amount',
+            'amount_to',
             'exchange_btc',
             'exchange_btc_eur',
             'value_eur',

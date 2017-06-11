@@ -9,8 +9,9 @@ use Yii;
  *
  * @property integer $transaction_id
  * @property integer $from_currency_id
+ * @property double $amount_from
  * @property integer $to_currency_id
- * @property double $amount
+ * @property double $amount_to
  * @property double $exchange_btc
  * @property double $exchange_btc_eur
  * @property double $value_eur
@@ -35,9 +36,9 @@ class Transactions extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['from_currency_id', 'to_currency_id', 'amount', 'exchange_btc', 'exchange_btc_eur', 'value_eur'], 'required'],
+            [['from_currency_id', 'to_currency_id', 'amount_from', 'amount_to','exchange_btc', 'exchange_btc_eur', 'value_eur'], 'required'],
             [['from_currency_id', 'to_currency_id'], 'integer'],
-            [['amount', 'exchange_btc', 'exchange_btc_eur', 'value_eur'], 'number'],
+            [['amount_from', 'amount_to', 'exchange_btc', 'exchange_btc_eur', 'value_eur'], 'number'],
             [['timestamp'], 'safe'],
             [['from_currency_id'], 'exist', 'skipOnError' => true, 'targetClass' => Currencies::className(), 'targetAttribute' => ['from_currency_id' => 'currency_id']],
             [['to_currency_id'], 'exist', 'skipOnError' => true, 'targetClass' => Currencies::className(), 'targetAttribute' => ['to_currency_id' => 'currency_id']],
@@ -52,8 +53,9 @@ class Transactions extends \yii\db\ActiveRecord
         return [
             'transaction_id' => Yii::t('app', 'Transaction ID'),
             'from_currency_id' => Yii::t('app', 'From Currency ID'),
+        	'amount_from' => Yii::t('app', 'Amount From'),
             'to_currency_id' => Yii::t('app', 'To Currency ID'),
-            'amount' => Yii::t('app', 'Amount'),
+            'amount_to' => Yii::t('app', 'Amount To'),
             'exchange_btc' => Yii::t('app', 'Exchange Btc'),
             'exchange_btc_eur' => Yii::t('app', 'Exchange Btc Eur'),
             'value_eur' => Yii::t('app', 'Value Eur'),

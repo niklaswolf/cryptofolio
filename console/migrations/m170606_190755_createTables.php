@@ -18,8 +18,9 @@ class m170606_190755_createTables extends Migration
 		$this->createTable("transactions", [
 			'transaction_id' => $this->primaryKey()->unsigned(),
 			'from_currency_id' => $this->integer()->unsigned()->notNull(),
+			'amount_from' => $this->float(8)->notNull(),
 			'to_currency_id' => $this->integer()->unsigned()->notNull(),
-			'amount' => $this->float(8)->notNull(),
+			'amount_to' => $this->float(8)->notNull(),
 			'exchange_btc' => $this->float(8)->notNull(),
 			'exchange_btc_eur' => $this->float(2)->notNull(),
 			'value_eur' => $this->float(2)->notNull(),

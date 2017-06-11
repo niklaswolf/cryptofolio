@@ -30,8 +30,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'transaction_id',
             'from_currency_id',
+        	'amount_from',
             'to_currency_id',
-            'amount',
+            'amount_to',
             'exchange_btc',
             'exchange_btc_eur',
             'value_eur',

@@ -60,10 +60,10 @@ class Currencies extends \yii\db\ActiveRecord
     	$incoming = 0;
     	$outgoing = 0;
     	foreach ($this->transactionsIncoming as $t){
-    		$incoming += $t->amount;
+    		$incoming += $t->amount_to;
     	}
     	foreach ($this->transactionsOutgoing as $t){
-    		$outgoing += $t->amount * $t->exchange_btc;
+    		$outgoing += $t->amount_from;
     	}
     	
     	return $incoming -$outgoing;
