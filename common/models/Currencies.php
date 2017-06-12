@@ -56,6 +56,10 @@ class Currencies extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * get the current amount of this currency
+     * @return number
+     */
     public function getAmount(){
     	$incoming = 0;
     	$outgoing = 0;
@@ -67,6 +71,14 @@ class Currencies extends \yii\db\ActiveRecord
     	}
     	
     	return $incoming -$outgoing;
+    }
+    
+    
+    public function getTransactions(){
+    	return Transactions::find()->where(['or',['from_currency_id' => $this->currency_id],[
+    				'to_currency_id' => $this->currency_id
+    			]
+    	])->all();
     }
     
     /**
