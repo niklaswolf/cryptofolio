@@ -16,5 +16,8 @@ export default {
 </script>
 
 <style>
-
+	#profit {
+		margin-top: 1em;
+		font-size: 1.1em;
+	}
 </style>

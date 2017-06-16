@@ -83,5 +83,13 @@ export default {
 </script>
 
 <style>
-
+	#overall {
+		background: #444;
+		color: #eee;
+		padding: 1em;
+	}
+	#last-update {
+		margin-top: 2em;
+		text-align: right;
+	}
 </style>
