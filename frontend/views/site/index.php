@@ -5,6 +5,7 @@
 $this->title = 'Dashboard';
 
 $this->registerJsFile(Yii::$app->request->baseUrl . "/js/vue.js", ['depends' => 'frontend\assets\AppAsset']);
+$this->registerJsFile(Yii::$app->request->baseUrl . "/js/components/CurrencyList.js", ['depends' => 'frontend\assets\AppAsset']);
 ?>
 <div id="overall" class="col-xs-12 col-md-3 col-md-push-9">
 	<h2>Kontostand</h2>
@@ -26,8 +27,8 @@ $this->registerJsFile(Yii::$app->request->baseUrl . "/js/vue.js", ['depends' => 
     			<b>Value Euro: {{ currency.value_eur }}</b>
     		</div>
     	</div>
-    	
     </template>
+    <div id="last-update" class="col-md-12">Last Update: {{lastUpdate}}</div>
 </div>
 
 <style>
@@ -39,5 +40,8 @@ $this->registerJsFile(Yii::$app->request->baseUrl . "/js/vue.js", ['depends' => 
 	#profit {
 		margin-top: 1em;
 		font-size: 1.1em;
+	}
+	#last-update {
+		margin-top: 2em;
 	}
 </style>
