@@ -15,7 +15,8 @@ class AppAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
-    	'https://unpkg.com/vue',
+    	'vue/dist/build.js',
+    	//'https://unpkg.com/vue',
     ];
     public $depends = [
         'yii\web\YiiAsset',
