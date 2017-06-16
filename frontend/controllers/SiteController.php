@@ -113,10 +113,10 @@ class SiteController extends Controller
     		foreach ($apiData as $apiDataset){
     			if($apiDataset['id'] == $dataset->api_identificator){
     				$currency["price_btc"] = $apiDataset['price_btc'];
-    				$currency["price_eur"] = $apiDataset['price_eur'];
+    				$currency["price_eur"] = round($apiDataset['price_eur'], 4);
     				
     				$currency["value_btc"] = $currency["price_btc"] * $dataset->amount;
-    				$currency["value_eur"] = $currency["price_eur"] * $dataset->amount;
+    				$currency["value_eur"] = round($currency["price_eur"] * $dataset->amount, 2);
     				break;
     			}
     		}

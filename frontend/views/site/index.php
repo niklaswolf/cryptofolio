@@ -8,10 +8,11 @@ $this->registerJsFile(Yii::$app->request->baseUrl . "/js/vue.js", ['depends' => 
 $this->registerJsFile(Yii::$app->request->baseUrl . "/js/components/CurrencyList.js", ['depends' => 'frontend\assets\AppAsset']);
 ?>
 <div id="overall" class="col-xs-12 col-md-3 col-md-push-9">
+	<div>Investment: {{investment}}€</div>
 	<h2>Kontostand</h2>
 	<div> {{ value_btc }} BTC</div>
 	<b>{{ value_eur }} €</b>
-	<div id="profit">Profit: {{profit}}€</div>
+	<div id="profit">Profit: {{profit}} €</div>
 </div>
 <div id="currencies" class="col-xs-12 col-md-9 col-md-pull-3">
     <template v-for="currency in currencies">

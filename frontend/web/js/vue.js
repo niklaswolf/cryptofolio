@@ -45,6 +45,7 @@ var currencies = new Vue({
 				data: {
 					value_btc: valueBTC,
 					value_eur: roundEuro (valueEUR),
+					investment: roundEuro(-euroAmount),
 					profit: roundEuro (valueEUR + euroAmount)
 				},
 			})
