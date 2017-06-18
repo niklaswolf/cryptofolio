@@ -92,4 +92,16 @@ export default {
 		margin-top: 2em;
 		text-align: right;
 	}
+	.positive {
+		color: #fff;
+		background: green;
+		padding: 0 6px;
+		border-radius: 10px;
+	}
+	.negative {
+		color: #fff;
+		background: red;
+		padding: 0 6px;
+		border-radius: 10px;
+	}
 </style>
