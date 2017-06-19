@@ -89,7 +89,6 @@ export default {
 		padding: 1em;
 	}
 	#last-update {
-		margin-top: 2em;
 		text-align: right;
 	}
 	.positive {

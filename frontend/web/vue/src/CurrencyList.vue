@@ -1,12 +1,12 @@
 <template >
 	<div>
+		<div id="last-update" class="col-md-12">Last Update: {{lastUpdate}}</div>
 		<currency-overview
 			v-for="(currency, index) in currencies"
 			v-bind:currency="currency"
 			v-bind:index="index"
 			v-bind:key="index">
 		</currency-overview>
-		<div id="last-update" class="col-md-12">Last Update: {{lastUpdate}}</div>
 	</div>
 </template>
 
