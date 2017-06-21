@@ -1,5 +1,5 @@
 <template >
-	<div class="col-md-6 currency">
+	<div class="col-md-6 col-lg-4 currency">
 		<div class="head">
 			<h2 class="title">{{ currency.name }} ({{ currency.symbol }})</h2>
 	  		<div class="changes">
@@ -30,7 +30,7 @@
 	  		<div class="value">
 	  			<div class="section-head">Value</div>
 	  			<div class="amount-btc">{{ currency.value_btc }} BTC</div>
-	  			<div class="value-eur">{{ currency.value_eur }} €</b>
+	  			<div class="value-eur">{{ currency.value_eur }} €</div>
 	  		</div>
   		</div>
   	</div>

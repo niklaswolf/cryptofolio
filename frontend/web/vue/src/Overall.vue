@@ -1,10 +1,12 @@
 <template>
-	<div>
-		<div>Investment: {{data.investment}}&euro;</div>
-		<h2>Kontostand</h2>
-		<div> {{ data.value_btc }} BTC</div>
-		<b>{{ data.value_eur }} &euro;</b>
-		<div id="profit">Profit: {{data.profit}} &euro; 
+	<div class="row overall-container">
+		<div class="col-lg-3">Investment: {{data.investment}}&euro;</div>
+		<div class="col-lg-3">Kontostand</div>
+		<div class="col-lg-3"> 
+			<div class="overall-btc">{{ data.value_btc }} BTC</div>
+			<div class="overall-eur">{{ data.value_eur }} &euro;</div>
+		</div>
+		<div id="profit" class="col-lg-3">Profit: {{data.profit}} &euro; 
 			<span v-bind:class="[isPositive(profitPercent()) ? 'positive' : 'negative']">
 				{{profitPercent()}}%
 			</span>
@@ -30,7 +32,7 @@ export default {
 
 <style>
 	#profit {
-		margin-top: 1em;
 		font-size: 1.1em;
+		text-align: right;
 	}
 </style>

@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-  	<div id="overall" class="col-xs-12 col-md-3 col-md-push-9">
+  	<div id="overall">
   		<overall
   			v-bind:data="overallData">
   		</overall>
   	</div>
-  	<div id="currencies" class="col-xs-12 col-md-9 col-md-pull-3">
+  	<div id="currencies">
   		<currency-list
   			v-bind:currencies="currencies"
   			v-bind:lastUpdate="lastUpdate">
@@ -90,6 +90,12 @@ export default {
 	}
 	#last-update {
 		text-align: right;
+	}
+	.flexbox {
+		display: -webkit-flex;
+		display: flex;
+		-webkit-flex-wrap: wrap;
+		flex-wrap: wrap;
 	}
 	.positive {
 		color: #fff;
