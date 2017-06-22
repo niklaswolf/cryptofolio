@@ -98,6 +98,8 @@ class SiteController extends Controller
     	$data = Currencies::find()->all();
     	$apiData = $this->queryAPI();
     	
+    	$bitcoinValue = $apiData[0]['price_eur'];
+    	
     	$filteredData = array();
     	foreach ($data as $dataset){
     		$currency = array();
@@ -118,7 +120,9 @@ class SiteController extends Controller
     				$currency["percent_change_7d"] = $apiDataset["percent_change_7d"];
     				
     				$currency["price_btc"] = $apiDataset['price_btc'];
-    				$currency["price_eur"] = round($apiDataset['price_eur'], 4);
+    				/*calculate it by self until apiData returns the correct value for price_eur*/
+    				//$currency["price_eur"] = round($apiDataset['price_eur'], 4);
+    				$currency["price_eur"] = round($apiDataset['price_btc'] * $bitcoinValue, 4);
     				
     				$currency["value_btc"] = $currency["price_btc"] * $dataset->amount;
     				$currency["value_eur"] = round($currency["price_eur"] * $dataset->amount, 2);
