@@ -5,11 +5,23 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
 	state: {
-		count: 0
+		currencies: {},
+		lastUpdate: "",
+		online: false,
+		overallData: {}
 	},
 	mutations: {
-		increment (state) {
-			state.count++
+		updateCurrencies (state, payload) {
+			state.currencies = payload;
+		},
+		updateOverall (state, payload) {
+			state.overallData = payload;
+		},
+		updateLastUpdate (state, lastUpdate) {
+			state.lastUpdate = lastUpdate;
+		},
+		setOnline (state, value){
+			state.online = value;
 		}
 	}
 })
