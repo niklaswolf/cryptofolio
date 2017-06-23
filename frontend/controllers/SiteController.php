@@ -49,6 +49,17 @@ class SiteController extends Controller
                     'logout' => ['post'],
                 ],
             ],
+        		'corsFilter'  => [
+        				'class' => \yii\filters\Cors::className(),
+        				'cors'  => [
+        						// restrict access to domains:
+        						'Origin'                           => ["*"],
+        						'Access-Control-Request-Method'    => ["GET",'POST'],
+        						'Access-Control-Allow-Credentials' => true,
+        						'Access-Control-Max-Age'           => 3600,                 // Cache (seconds)
+        				],
+        		],
+        		
         ];
     }
 
