@@ -39,15 +39,6 @@ export default {
 	#last-update {
 		text-align: right;
 	}
-	.wrapper {
-		padding: 0 5%;
-	}
-	.flexbox {
-		display: -webkit-flex;
-		display: flex;
-		-webkit-flex-wrap: wrap;
-		flex-wrap: wrap;
-	}
 	.positive {
 		color: #fff;
 		background: green;

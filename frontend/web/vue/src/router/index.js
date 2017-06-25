@@ -8,7 +8,7 @@ export default new Router({
   routes: [
     {path: '/', component: require('../Dashboard.vue')},
     {path: '/currencies', component: require('../Currencies.vue')},
-    {path: '/transactions', component: require('../Dashboard.vue')},
+    {path: '/transactions', component: require('../Transactions.vue')},
     {path: '*', redirect: '/'} // 404
   ],
   scrollBehavior (to, from, savedPosition) {

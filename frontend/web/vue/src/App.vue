@@ -89,4 +89,13 @@ export default {
 		font-size: 2em;
 		text-align: center;
 	}
+	.wrapper {
+		padding: 0 5%;
+	}
+	.flexbox {
+		display: -webkit-flex;
+		display: flex;
+		-webkit-flex-wrap: wrap;
+		flex-wrap: wrap;
+	}
 </style>

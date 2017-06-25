@@ -5,9 +5,9 @@ namespace frontend\controllers;
 use Yii;
 use common\models\Transactions;
 use frontend\models\TransactionSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 
 /**
  * TransactionController implements the CRUD actions for Transactions model.
@@ -19,16 +19,14 @@ class TransactionController extends Controller
      */
     public function behaviors()
     {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
+        return parent::behaviors();
     }
 
+    public function actionData(){
+    	\Yii::$app->getResponse()->format = Response::FORMAT_JSON;
+    	return Transactions::find()->orderBy("timestamp DESC")->all();
+    }
+    
     /**
      * Lists all Transactions models.
      * @return mixed
