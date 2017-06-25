@@ -4,7 +4,6 @@ namespace frontend\controllers;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
-use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
@@ -26,41 +25,32 @@ class SiteController extends Controller
      */
     public function behaviors()
     {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
-                'rules' => [
-                    [
-                        'actions' => ['signup'],
-                        'allow' => true,
-                        'roles' => ['?'],
-                    ],
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        		'corsFilter'  => [
-        				'class' => \yii\filters\Cors::className(),
-        				'cors'  => [
-        						// restrict access to domains:
-        						'Origin'                           => ["*"],
-        						'Access-Control-Request-Method'    => ["GET",'POST'],
-        						'Access-Control-Allow-Credentials' => true,
-        						'Access-Control-Max-Age'           => 3600,                 // Cache (seconds)
-        				],
-        		],
-        		
-        ];
+    	return array_merge(parent::behaviors(), 
+    		[
+	            'access' => [
+	                'class' => AccessControl::className(),
+	                'only' => ['logout', 'signup'],
+	                'rules' => [
+	                    [
+	                        'actions' => ['signup'],
+	                        'allow' => true,
+	                        'roles' => ['?'],
+	                    ],
+	                    [
+	                        'actions' => ['logout'],
+	                        'allow' => true,
+	                        'roles' => ['@'],
+	                    ],
+	                ],
+	            ],
+	            'verbs' => [
+	                'class' => VerbFilter::className(),
+	                'actions' => [
+	                    'logout' => ['post'],
+	                ],
+	            ],        		
+	        ]
+    	);
     }
 
     /**
@@ -114,6 +104,7 @@ class SiteController extends Controller
     	$filteredData = array();
     	foreach ($data as $dataset){
     		$currency = array();
+    		$currency["id"] = $dataset->currency_id;
     		$currency["name"] = $dataset->name;
     		$currency["symbol"] = $dataset->symbol;
     		$currency["amount"] = $dataset->amount;
