@@ -5,6 +5,14 @@
   		<thead>
 	  		<tr>
 	  			<th>Transaction ID</th>
+	  			<th>From Currency</th>
+	  			<th>Amount From</th>
+	  			<th>To Currency</th>
+	  			<th>Amount To</th>
+	  			<th>Exchange BTC</th>
+	  			<th>Exchange BTC/EUR</th>
+	  			<th>Value EUR</th>
+	  			<th>Timestamp</th>
 	  		</tr>
 	  	</thead>
 	  	<tbody>
